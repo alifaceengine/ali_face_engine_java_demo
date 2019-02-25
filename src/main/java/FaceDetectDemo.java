@@ -5,14 +5,8 @@
 import com.alibaba.cloud.faceengine.*;
 import com.alibaba.cloud.faceengine.Error;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import java.lang.reflect.Field;
-
 public class FaceDetectDemo {
-    private static String PICTURE_ROOT = "./pictures/";
+
     private static int RunMode = Mode.TERMINAL;
 
     public static void main(String[] args) {
@@ -26,6 +20,13 @@ public class FaceDetectDemo {
         } else {
             System.out.println("authorize OK");
         }
+
+
+        //step 2: set Cloud addr and account if you using CloudServer
+        //FaceEngine.setCloudAddr("101.132.89.177", 15000);
+        //FaceEngine.setCloudAddr("127.0.0.1", 8080);
+        FaceEngine.setCloudLoginAccount("admin", "admin");
+
 
         //face detect
         detectPicture();
@@ -42,7 +43,7 @@ public class FaceDetectDemo {
             return;
         }
 
-        byte[] jpegData = Utils.loadFile(PICTURE_ROOT + "many_faces.jpg");
+        byte[] jpegData = Utils.loadFile(Utils.PICTURE_ROOT + "many_faces.jpg");
         //byte[] jpegData = loadFile(PICTURE_ROOT + "fanbingbing_with_glass.jpg");
         Image image = new Image();
         image.data = jpegData;
@@ -74,10 +75,5 @@ public class FaceDetectDemo {
         FaceDetect.deleteInstance(faceDetect);
         faceDetect = null;
         System.out.println("detectPicture end\n\n======================");
-    }
-
-
-    static {
-        Utils.setAliFaceEngineLibPath();
     }
 }

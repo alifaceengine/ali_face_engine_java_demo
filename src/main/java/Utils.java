@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 
 public class Utils {
     public static final String VENDOR_KEY = "eyJ2ZW5kb3JJZCI6ImNlc2hpX3ZlbmRvciIsInJvbGUiOjIsImNvZGUiOiIzRDE5RUIwNjY1OEE5MUExQzlCNDY0MzhDN0QwNDFGMyIsImV4cGlyZSI6IjIwMTkwMzMxIiwidHlwZSI6MX0=";
+    public static String PICTURE_ROOT = "./pictures/";
 
     public static byte[] loadFile(String filePath) {
         File file = new File(filePath);
@@ -38,42 +39,5 @@ public class Utils {
         }
 
         return buffer;
-    }
-
-    public static void setAliFaceEngineLibPath() {
-        String osName = System.getProperty("os.name");
-        String osArch = System.getProperty("os.arch");
-        String userDir = System.getProperty("user.dir");
-        System.out.println("os.name: " + osName + ", os.arch: " + osArch + ", user.dir: " + userDir);
-
-        if (osName == null) {
-            throw new RuntimeException("setAliFaceEngineLibPath error, unknown os");
-        }
-
-        String AliFaceEngineLibPath = "";
-        if (osName.contains("Mac")) {
-            AliFaceEngineLibPath = "libs/Darwin/";
-        } else if (osName.contains("Windows")) {
-            AliFaceEngineLibPath = "libs/Windows/";
-            if (osArch.contains("64")) {
-                AliFaceEngineLibPath += "x64/";
-            } else {
-                AliFaceEngineLibPath += "x86/";
-            }
-        } else {
-            throw new RuntimeException("setAliFaceEngineLibPath error, unsupported os");
-        }
-
-        System.setProperty("java.library.path", System.getProperty("java.library.path")
-                + ":" + userDir + "/" + AliFaceEngineLibPath);
-        System.out.println("java.library.path: " + System.getProperty("java.library.path"));
-
-        try {
-            Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-            fieldSysPath.setAccessible(true);
-            fieldSysPath.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException("setAliFaceEngineLibPath error, set java.library.path error");
-        }
     }
 }
