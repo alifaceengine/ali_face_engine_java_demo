@@ -20,12 +20,6 @@ public class FaceVerifyDemo {
             System.out.println("authorize OK");
         }
 
-
-        //step 2: set Cloud addr and account if you using CloudServer
-        //FaceEngine.setCloudAddr("101.132.89.177", 15000);
-        //FaceEngine.setCloudAddr("127.0.0.1", 8080);
-        FaceEngine.setCloudLoginAccount("admin", "admin");
-
         //1:1 face verify
         verifyPicture();
     }
