@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class FaceRecognize_RtspDemo extends JFrame implements Runnable, WebcamPanel.Painter, FaceRecognize.RecognizeVideoListener {
+public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamPanel.Painter, FaceRecognize.RecognizeVideoListener {
     private static final long serialVersionUID = 1L;
     private static final Executor EXECUTOR = Executors.newCachedThreadPool();
     private Webcam webcam = null;
@@ -39,10 +39,10 @@ public class FaceRecognize_RtspDemo extends JFrame implements Runnable, WebcamPa
     private DetectParameter mDetectParameter;
 
 
-    public FaceRecognize_RtspDemo() {
+    public FaceRecognize_RTSP_Demo() {
 
         super();
-        String name = "FaceRecognize_RtspDemo";
+        String name = "FaceRecognize_RTSP_Demo";
         String rtsp = "rtsp://admin:xiolift123@192.168.1.220/";
         Webcam.setDriver(new VlcjDriver(Arrays.asList(new MediaListItem(name, rtsp, new ArrayList<MediaListItem>()))));
         webcam = Webcam.getWebcams().get(0);
@@ -61,7 +61,7 @@ public class FaceRecognize_RtspDemo extends JFrame implements Runnable, WebcamPa
         panel.repaint();
         add(panel);
 
-        setTitle("FaceRecognize_RtspDemo");
+        setTitle("FaceRecognize_RTSP_Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
@@ -334,7 +334,7 @@ public class FaceRecognize_RtspDemo extends JFrame implements Runnable, WebcamPa
     }
 
     public static void main(String[] args) throws IOException {
-        new FaceRecognize_RtspDemo();
+        new FaceRecognize_RTSP_Demo();
     }
 
     private static String getTime() {
