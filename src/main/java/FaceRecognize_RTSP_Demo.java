@@ -99,8 +99,8 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
         mDetectParameter = faceDetect.getVideoParameter();
         mDetectParameter.checkQuality = 0;
         mDetectParameter.checkLiveness = 0;
-        mDetectParameter.checkAge = 1;
-        mDetectParameter.checkGender = 1;
+        mDetectParameter.checkAge = 0;
+        mDetectParameter.checkGender = 0;
         mDetectParameter.checkExpression = 0;
         mDetectParameter.checkGlass = 0;
         faceDetect.setVideoParameter(mDetectParameter);
@@ -118,52 +118,10 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
             }
         }
 
+
         //register pictures
-        if (false) {
-            for (int i = 0; i < BASE_PERSONS.length; i++) {
-                String personName = BASE_PERSONS[i].split("_")[0];
-                String featureName = BASE_PERSONS[i].split("_")[1].split("\\.")[0];
-
-                byte[] imageData = Utils.loadFile(Utils.PICTURE_ROOT + BASE_PERSONS[i]);
-                if (imageData == null) {
-                    throw new RuntimeException("loadFile " + BASE_PERSONS[i] + " error");
-                }
-
-                Image image = new Image();
-                image.data = imageData;
-                image.format = ImageFormat.ImageFormat_UNKNOWN;
-                Face faces[] = faceDetect.detectPicture(image);
-                if (faces == null) {
-                    throw new RuntimeException("detectPicture " + BASE_PERSONS[i] + " error");
-                }
-
-
-                String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_SMALL);
-                if (featureStr == null) {
-                    throw new RuntimeException("extractFeature " + BASE_PERSONS[i] + " error");
-                }
-
-
-                Person person = new Person();
-                person.name = personName;
-                error = faceRegister.addPerson(sGroup.id, person);
-                if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
-                    throw new RuntimeException("addPerson " + personName + " error:" + error);
-                } else {
-                    printf("addPerson success: personName:" + person.name + " personId:" + person.id);
-                }
-
-
-                Feature feature = new Feature();
-                feature.name = featureName;
-                feature.feature = featureStr;
-                error = faceRegister.addFeature(person.id, feature);
-                if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
-                    throw new RuntimeException("addFeature " + featureName + " error:" + error);
-                } else {
-                    printf("addFeature success: personName:" + personName + " featureId:" + feature.id + " featureName:" + feature.name);/**/
-                }
-            }
+        if (true) {
+            registerPictures(faceDetect, faceRegister);
         }
 
 
@@ -219,11 +177,8 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
         }
 
         FaceDetect.deleteInstance(faceDetect);
-        faceDetect = null;
         FaceRecognize.deleteInstance(faceRecognize);
-        faceRecognize = null;
         FaceRegister.deleteInstance(faceRegister);
-        faceRegister = null;
     }
 
     @Override
@@ -238,6 +193,53 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
         mRecognizeResult = results;
     }
 
+    private void registerPictures(FaceDetect faceDetect, FaceRegister faceRegister) {
+        for (int i = 0; i < BASE_PERSONS.length; i++) {
+            String personName = BASE_PERSONS[i].split("_")[0];
+            String featureName = BASE_PERSONS[i].split("_")[1].split("\\.")[0];
+
+            byte[] imageData = Utils.loadFile(Utils.PICTURE_ROOT + BASE_PERSONS[i]);
+            if (imageData == null) {
+                throw new RuntimeException("loadFile " + BASE_PERSONS[i] + " error");
+            }
+
+            Image image = new Image();
+            image.data = imageData;
+            image.format = ImageFormat.ImageFormat_UNKNOWN;
+            Face faces[] = faceDetect.detectPicture(image);
+            if (faces == null) {
+                throw new RuntimeException("detectPicture " + BASE_PERSONS[i] + " error");
+            }
+
+
+            String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_SMALL);
+            if (featureStr == null) {
+                throw new RuntimeException("extractFeature " + BASE_PERSONS[i] + " error");
+            }
+
+
+            Person person = new Person();
+            person.name = personName;
+            int error = faceRegister.addPerson(sGroup.id, person);
+            if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
+                throw new RuntimeException("addPerson " + personName + " error:" + error);
+            } else {
+                printf("addPerson success: personName:" + person.name + " personId:" + person.id);
+            }
+
+
+            Feature feature = new Feature();
+            feature.name = featureName;
+            feature.feature = featureStr;
+            error = faceRegister.addFeature(person.id, feature);
+            if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
+                throw new RuntimeException("addFeature " + featureName + " error:" + error);
+            } else {
+                printf("addFeature success: personName:" + personName + " featureId:" + feature.id + " featureName:" + feature.name);/**/
+            }
+        }
+    }
+
     @Override
     public void paintPanel(WebcamPanel panel, Graphics2D g2) {
         printf("paintPanel");
@@ -248,7 +250,7 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
 
     @Override
     public void paintImage(WebcamPanel panel, BufferedImage image, Graphics2D g2) {
-        printf("paintImage begin");
+        //printf("paintImage begin");
         if (painter != null) {
             painter.paintImage(panel, image, g2);
         }
@@ -260,7 +262,7 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("ss.SSS");
             g2.drawString("time : " + sdf.format(date), 100, 400);
-            printf("paintImage end");
+            //printf("paintImage end");
             return;
         }
 
@@ -316,7 +318,7 @@ public class FaceRecognize_RTSP_Demo extends JFrame implements Runnable, WebcamP
             g2.drawString("time : " + sdf.format(date), x + 5, bounds.bottom * panel.getHeight() / image.getHeight());
         }
 
-        printf("paintImage end");
+        //printf("paintImage end");
     }
 
     private RecognizeResult getRecognizeResult(Face face) {

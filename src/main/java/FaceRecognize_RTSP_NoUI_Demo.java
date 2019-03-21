@@ -7,8 +7,6 @@ import com.github.sarxos.webcam.WebcamResolution;
 import com.github.sarxos.webcam.ds.vlcj.VlcjDriver;
 import uk.co.caprica.vlcj.medialist.MediaListItem;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,7 +38,6 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
 
 
     public FaceRecognize_RTSP_NoUI_Demo() {
-
         super();
         String name = "FaceRecognize_RTSP_NoUI_Demo";
         String rtsp = "rtsp://admin:xiolift123@192.168.1.220/";
@@ -63,6 +60,7 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
         }
 
         FaceEngine.setCloudLoginAccount("admin", "admin");
+        FaceEngine.setPersistencePath("./");
 
         FaceRegister faceRegister = FaceRegister.createInstance();
         if (faceRegister == null) {
@@ -82,8 +80,8 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
         mDetectParameter = faceDetect.getVideoParameter();
         mDetectParameter.checkQuality = 0;
         mDetectParameter.checkLiveness = 0;
-        mDetectParameter.checkAge = 1;
-        mDetectParameter.checkGender = 1;
+        mDetectParameter.checkAge = 0;
+        mDetectParameter.checkGender = 0;
         mDetectParameter.checkExpression = 0;
         mDetectParameter.checkGlass = 0;
         faceDetect.setVideoParameter(mDetectParameter);
@@ -102,51 +100,8 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
         }
 
         //register pictures
-        if (false) {
-            for (int i = 0; i < BASE_PERSONS.length; i++) {
-                String personName = BASE_PERSONS[i].split("_")[0];
-                String featureName = BASE_PERSONS[i].split("_")[1].split("\\.")[0];
-
-                byte[] imageData = Utils.loadFile(Utils.PICTURE_ROOT + BASE_PERSONS[i]);
-                if (imageData == null) {
-                    throw new RuntimeException("loadFile " + BASE_PERSONS[i] + " error");
-                }
-
-                Image image = new Image();
-                image.data = imageData;
-                image.format = ImageFormat.ImageFormat_UNKNOWN;
-                Face faces[] = faceDetect.detectPicture(image);
-                if (faces == null) {
-                    throw new RuntimeException("detectPicture " + BASE_PERSONS[i] + " error");
-                }
-
-
-                String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_SMALL);
-                if (featureStr == null) {
-                    throw new RuntimeException("extractFeature " + BASE_PERSONS[i] + " error");
-                }
-
-
-                Person person = new Person();
-                person.name = personName;
-                error = faceRegister.addPerson(sGroup.id, person);
-                if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
-                    throw new RuntimeException("addPerson " + personName + " error:" + error);
-                } else {
-                    printf("addPerson success: personName:" + person.name + " personId:" + person.id);
-                }
-
-
-                Feature feature = new Feature();
-                feature.name = featureName;
-                feature.feature = featureStr;
-                error = faceRegister.addFeature(person.id, feature);
-                if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
-                    throw new RuntimeException("addFeature " + featureName + " error:" + error);
-                } else {
-                    printf("addFeature success: personName:" + personName + " featureId:" + feature.id + " featureName:" + feature.name);/**/
-                }
-            }
+        if (true) {
+            registerPictures(faceDetect, faceRegister);
         }
 
 
@@ -202,12 +157,57 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
         }
 
         FaceDetect.deleteInstance(faceDetect);
-        faceDetect = null;
         FaceRecognize.deleteInstance(faceRecognize);
-        faceRecognize = null;
         FaceRegister.deleteInstance(faceRegister);
-        faceRegister = null;
     }
+
+    private void registerPictures(FaceDetect faceDetect, FaceRegister faceRegister) {
+        for (int i = 0; i < BASE_PERSONS.length; i++) {
+            String personName = BASE_PERSONS[i].split("_")[0];
+            String featureName = BASE_PERSONS[i].split("_")[1].split("\\.")[0];
+
+            byte[] imageData = Utils.loadFile(Utils.PICTURE_ROOT + BASE_PERSONS[i]);
+            if (imageData == null) {
+                throw new RuntimeException("loadFile " + BASE_PERSONS[i] + " error");
+            }
+
+            Image image = new Image();
+            image.data = imageData;
+            image.format = ImageFormat.ImageFormat_UNKNOWN;
+            Face faces[] = faceDetect.detectPicture(image);
+            if (faces == null) {
+                throw new RuntimeException("detectPicture " + BASE_PERSONS[i] + " error");
+            }
+
+
+            String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_SMALL);
+            if (featureStr == null) {
+                throw new RuntimeException("extractFeature " + BASE_PERSONS[i] + " error");
+            }
+
+
+            Person person = new Person();
+            person.name = personName;
+            int error = faceRegister.addPerson(sGroup.id, person);
+            if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
+                throw new RuntimeException("addPerson " + personName + " error:" + error);
+            } else {
+                printf("addPerson success: personName:" + person.name + " personId:" + person.id);
+            }
+
+
+            Feature feature = new Feature();
+            feature.name = featureName;
+            feature.feature = featureStr;
+            error = faceRegister.addFeature(person.id, feature);
+            if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
+                throw new RuntimeException("addFeature " + featureName + " error:" + error);
+            } else {
+                printf("addFeature success: personName:" + personName + " featureId:" + feature.id + " featureName:" + feature.name);/**/
+            }
+        }
+    }
+
 
     @Override
     public void onRecognized(Image image, RecognizeResult[] results) {
@@ -229,6 +229,20 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
         for (int i = 0; i < mRecognizeResult.length; i++) {
             if (mRecognizeResult[i].trackId == face.trackId) {
                 return mRecognizeResult[i];
+            }
+        }
+
+        return null;
+    }
+
+    private Face getFace(RecognizeResult result) {
+        if (faces == null) {
+            return null;
+        }
+
+        for (int i = 0; i < faces.length; i++) {
+            if (faces[i].trackId == result.trackId) {
+                return faces[i];
             }
         }
 
