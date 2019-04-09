@@ -13,7 +13,7 @@ public class FaceRegister_Demo {
 
     public static void main(String[] args) {
         //step 1: authorize or enable debug
-        FaceEngine.enableDebug(false);
+        FaceEngine.enableDebug(true);
         System.out.println("VENDOR_KEY : " + Utils.VENDOR_KEY);
         int error = FaceEngine.authorize(Utils.VENDOR_KEY);
         if (error != Error.OK) {
