@@ -1,3 +1,4 @@
 #!/bin/bash
 
-./run.sh Linux
+DEMO=$1
+./run.sh Linux ${DEMO}

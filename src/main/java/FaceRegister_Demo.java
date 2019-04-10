@@ -106,6 +106,7 @@ public class FaceRegister_Demo {
 
             Person person = new Person();
             person.name = personName;
+            person.tag = "mytag";
             int error = faceRegister.addPerson(groupId, person);
             if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
                 throw new RuntimeException("addPerson " + personName + " error:" + error);
@@ -190,6 +191,7 @@ public class FaceRegister_Demo {
         for (int i = 0; i < persons.length; i++) {
             Person personCopy = new Person();
             personCopy.name = persons[i].name;
+            personCopy.tag = persons[i].tag;
             error = faceRegister.addPerson(newGroup.id, personCopy);
             if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
                 throw new RuntimeException("copyGroup addPerson" + personCopy.name + " error:" + error);
