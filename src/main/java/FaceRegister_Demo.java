@@ -43,7 +43,7 @@ public class FaceRegister_Demo {
         getAllPersons(faceRegister, sGroup.id);
         getPersonNum(faceRegister, sGroup.id);
 
-
+        updatePerson(faceRegister, sGroup.id);
         copyGroup(faceRegister);
 
         //release instance
@@ -106,7 +106,7 @@ public class FaceRegister_Demo {
 
             Person person = new Person();
             person.name = personName;
-            person.tag = "mytag";
+            //person.tag = "mytag";
             int error = faceRegister.addPerson(groupId, person);
             if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
                 throw new RuntimeException("addPerson " + personName + " error:" + error);
@@ -169,6 +169,29 @@ public class FaceRegister_Demo {
         int num = faceRegister.getPersonNum(groupId);
         System.out.println("getPersonNum=" + num);
         System.out.println("getPersonNum end\n\n------------");
+    }
+
+    private static void updatePerson(FaceRegister faceRegister, String groupId) {
+        Person persons[] = faceRegister.getAllPersons(groupId);
+        if (persons == null) {
+            System.out.println("updatePerson getAllPersons =null");
+        } else {
+            for (int i = 0; i < persons.length; i++) {
+                System.out.println("updatePerson before [" + i + "]=" + persons[i]);
+                persons[i].tag = "new tag44";
+                faceRegister.updatePerson(persons[i].id, persons[i]);
+            }
+        }
+
+        Person persons2[] = faceRegister.getAllPersons(groupId);
+
+        if (persons2 == null) {
+            System.out.println("updatePerson getAllPersons =null");
+        } else {
+            for (int i = 0; i < persons2.length; i++) {
+                System.out.println("updatePerson after [" + i + "]=" + persons2[i]);
+            }
+        }
     }
 
     private static void copyGroup(FaceRegister faceRegister) {
