@@ -44,6 +44,9 @@ public class FaceRegister_Demo {
         getPersonNum(faceRegister, sGroup.id);
 
         updatePerson(faceRegister, sGroup.id);
+
+        updatePersonByName(faceRegister, sGroup.id);
+
         copyGroup(faceRegister);
 
         //release instance
@@ -191,6 +194,26 @@ public class FaceRegister_Demo {
             for (int i = 0; i < persons2.length; i++) {
                 System.out.println("updatePerson after [" + i + "]=" + persons2[i]);
             }
+        }
+    }
+
+    private static void updatePersonByName(FaceRegister faceRegister, String groupId) {
+        Person person = faceRegister.getPersonByName(groupId, "liudehua");
+        if (person == null) {
+            System.out.println("updatePersonByName person is null");
+            return;
+        }
+
+        System.out.println("updatePersonByName before " + person);
+        person.tag = "new tag4499999";
+        faceRegister.updatePerson(person.id, person);
+
+        Person personsNew = faceRegister.getPerson(person.id);
+
+        if (personsNew == null) {
+            System.out.println("updatePersonByName after is null");
+        } else {
+            System.out.println("updatePersonByName after is " + personsNew);
         }
     }
 
