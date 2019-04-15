@@ -8,12 +8,12 @@ import com.alibaba.cloud.faceengine.*;
 public class FaceRegister_Demo {
     private static int RunMode = Mode.TERMINAL;
     //private static int RunMode = Mode.CLOUD;
-    private static String GROUP_NAME = "组A";
+    private static String GROUP_NAME = "组ABB";
     private static Group sGroup = new Group();
 
     public static void main(String[] args) {
         //step 1: authorize or enable debug
-        FaceEngine.enableDebug(true);
+        FaceEngine.enableDebug(false);
         System.out.println("VENDOR_KEY : " + Utils.VENDOR_KEY);
         int error = FaceEngine.authorize(Utils.VENDOR_KEY);
         if (error != Error.OK) {
@@ -27,7 +27,7 @@ public class FaceRegister_Demo {
         //step 2: set Cloud addr and account if you using CloudServer
         //FaceEngine.setCloudAddr("101.132.89.177", 15000);
         //FaceEngine.setCloudAddr("127.0.0.1", 8080);
-        FaceEngine.setCloudLoginAccount("admin", "admin");
+        //FaceEngine.setCloudLoginAccount("admin", "admin");
 
 
         //1:N face recognize
@@ -36,6 +36,7 @@ public class FaceRegister_Demo {
         //1:N, step1:register face
         registerPictures(faceRegister);
 
+        updatePersonByName(faceRegister, sGroup.id);
 
         //other face database management
         getAllGroups(faceRegister);
@@ -205,7 +206,7 @@ public class FaceRegister_Demo {
         }
 
         System.out.println("updatePersonByName before " + person);
-        person.tag = "new tag4499999";
+        person.tag = "new tag1234";
         faceRegister.updatePerson(person.id, person);
 
         Person personsNew = faceRegister.getPerson(person.id);
