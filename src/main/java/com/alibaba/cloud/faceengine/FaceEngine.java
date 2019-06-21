@@ -37,6 +37,10 @@ public class FaceEngine {
         AliFaceEngineJNI.setPersistencePath(path);
     }
 
+    public static boolean supportGPU() {
+        return AliFaceEngineJNI.supportGPU();
+    }
+
     public static void setConfigString(String key, String value) {
         AliFaceEngineJNI.setConfigString(key, value);
     }

@@ -20,6 +20,8 @@ public class AliFaceEngineJNI {
 
     public static native void setPersistencePath(String path);
 
+    public static native boolean supportGPU();
+
     public static native void setConfigString(String key, String value);
 
     public static native void setConfigInt(String key, int value);
