@@ -108,6 +108,7 @@ public class FaceRecognizeDemo {
 
             Person person = new Person();
             person.name = personName;
+            person.tag = "tag1";
             int error = faceRegister.addPerson(groupId, person);
             if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
                 throw new RuntimeException("addPerson " + personName + " error:" + error);
