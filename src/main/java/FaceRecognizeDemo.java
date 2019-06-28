@@ -31,7 +31,7 @@ public class FaceRecognizeDemo {
 
 
         //1:N face recognize
-        FaceRecognize faceRecognize = FaceRecognize.createInstance(RunMode);
+        FaceRecognize faceRecognize = FaceRecognize.createInstance(GROUP_NAME, RunMode);
         FaceRegister faceRegister = FaceRegister.createInstance();
 
         //1:N, step1:register face
@@ -137,8 +137,6 @@ public class FaceRecognizeDemo {
             System.out.println("FaceDetect.createInstance error");
             return;
         }
-
-        faceRecognize.setGroupId(groupId);
 
         for (int i = 0; i < TEST_PERSONS.length; i++) {
             String personName = TEST_PERSONS[i].split("\\.")[0];

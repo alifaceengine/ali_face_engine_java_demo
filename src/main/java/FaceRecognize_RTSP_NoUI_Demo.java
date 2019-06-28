@@ -67,7 +67,7 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
             return;
         }
 
-        FaceRecognize faceRecognize = FaceRecognize.createInstance(RunMode);
+        FaceRecognize faceRecognize = FaceRecognize.createInstance(GROUP_NAME, RunMode);
         if (faceRecognize == null) {
             return;
         }
@@ -108,10 +108,6 @@ public class FaceRecognize_RTSP_NoUI_Demo implements Runnable, FaceRecognize.Rec
         //set the group to recognize
         {
             faceRecognize.setRecognizeVideoListener(this);
-            error = faceRecognize.setGroupId(sGroup.id);
-            if (error != Error.OK) {
-                throw new RuntimeException("faceRecognize setGroupId error:" + error);
-            }
         }
 
 
