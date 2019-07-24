@@ -42,12 +42,12 @@ public class FaceVerifyDemo {
         byte[] imageData1 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature1.jpg");
         Image image1 = new Image();
         image1.data = imageData1;
-        image1.format = ImageFormat.ImageFormat_UNKNOWN;
+        image1.format = ImageFormat.COMPRESSED;
 
         byte[] imageData2 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature2.jpg");
         Image image2 = new Image();
         image2.data = imageData2;
-        image2.format = ImageFormat.ImageFormat_UNKNOWN;
+        image2.format = ImageFormat.COMPRESSED;
 
         Face[] faces1 = faceDetect.detectPicture(image1);
         Face[] faces2 = faceDetect.detectPicture(image2);

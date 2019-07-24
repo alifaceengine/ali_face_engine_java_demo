@@ -46,22 +46,22 @@ public class ToolsDemo {
         byte[] imageData1 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature1.jpg");
         Image image1 = new Image();
         image1.data = imageData1;
-        image1.format = ImageFormat.ImageFormat_UNKNOWN;
+        image1.format = ImageFormat.COMPRESSED;
 
         byte[] imageData2 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature2.jpg");
         Image image2 = new Image();
         image2.data = imageData2;
-        image2.format = ImageFormat.ImageFormat_UNKNOWN;
+        image2.format = ImageFormat.COMPRESSED;
 
         Face[] faces1 = faceDetect.detectPicture(image1);
         Face[] faces2 = faceDetect.detectPicture(image2);
 
-        String featureStr1 = faceRegister.extractFeature(image1, faces1[0], ModelType.MODEL_SMALL);
+        String featureStr1 = faceRegister.extractFeature(image1, faces1[0], ModelType.MODEL_3K);
         if (featureStr1 == null) {
             throw new RuntimeException("extractFeature image1 error");
         }
 
-        String featureStr2 = faceRegister.extractFeature(image2, faces2[0], ModelType.MODEL_SMALL);
+        String featureStr2 = faceRegister.extractFeature(image2, faces2[0], ModelType.MODEL_3K);
         if (featureStr2 == null) {
             throw new RuntimeException("extractFeature image2 error");
         }
@@ -91,22 +91,22 @@ public class ToolsDemo {
         byte[] imageData1 = Utils.loadFile(Utils.PICTURE_ROOT + "zhangxueyou_feature1.jpg");
         Image image1 = new Image();
         image1.data = imageData1;
-        image1.format = ImageFormat.ImageFormat_UNKNOWN;
+        image1.format = ImageFormat.COMPRESSED;
 
         byte[] imageData2 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature2.jpg");
         Image image2 = new Image();
         image2.data = imageData2;
-        image2.format = ImageFormat.ImageFormat_UNKNOWN;
+        image2.format = ImageFormat.COMPRESSED;
 
         Face[] faces1 = faceDetect.detectPicture(image1);
         Face[] faces2 = faceDetect.detectPicture(image2);
 
-        String featureStr1 = faceRegister.extractFeature(image1, faces1[0], ModelType.MODEL_SMALL);
+        String featureStr1 = faceRegister.extractFeature(image1, faces1[0], ModelType.MODEL_3K);
         if (featureStr1 == null) {
             throw new RuntimeException("extractFeature image1 error");
         }
 
-        String featureStr2 = faceRegister.extractFeature(image2, faces2[0], ModelType.MODEL_SMALL);
+        String featureStr2 = faceRegister.extractFeature(image2, faces2[0], ModelType.MODEL_3K);
         if (featureStr2 == null) {
             throw new RuntimeException("extractFeature image2 error");
         }

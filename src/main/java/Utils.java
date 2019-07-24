@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 public class Utils {
-    public static final String VENDOR_KEY = "eyJ2ZW5kb3JJZCI6ImNlc2hpX3ZlbmRvciIsInJvbGUiOjEsImNvZGUiOiJFOEUyNzE1NEY3QjYxMDQ3QjQ0RUNDN0IyOUJFM0ZFQiIsImV4cGlyZSI6IjIwMTkwNjMwIiwidHlwZSI6MX0=";
+    public static final String VENDOR_KEY = "eyJ2ZW5kb3JJZCI6ImNlc2hpX3ZlbmRvciIsInJvbGUiOjIsImNvZGUiOiJBNEU1QzZCNkMxQkY4RkZENjgwRTY2NkIzMkIxNjI2RSIsImV4cGlyZSI6IjIwMTkwODMxIiwidHlwZSI6MX0=";
     public static String PICTURE_ROOT = "./pictures/";
 
     public static byte[] loadFile(String filePath) {

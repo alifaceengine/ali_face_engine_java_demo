@@ -65,7 +65,7 @@ public class FaceRegister_Demo {
     private static void registerPictures(FaceRegister faceRegister) {
         System.out.println("registerPictures begin");
         sGroup.name = GROUP_NAME;
-        sGroup.modelType = ModelType.MODEL_SMALL;
+        sGroup.modelType = ModelType.MODEL_3K;
         int error = faceRegister.createGroup(sGroup);
         if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
             throw new RuntimeException("createGroup " + GROUP_NAME + " error:" + error);
@@ -95,14 +95,14 @@ public class FaceRegister_Demo {
 
             Image image = new Image();
             image.data = imageData;
-            image.format = ImageFormat.ImageFormat_UNKNOWN;
+            image.format = ImageFormat.COMPRESSED;
             Face faces[] = faceDetect.detectPicture(image);
             if (faces == null) {
                 throw new RuntimeException("detectPicture " + BASE_PERSONS[i] + " error");
             }
 
 
-            String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_SMALL);
+            String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_3K);
             if (featureStr == null) {
                 throw new RuntimeException("extractFeature " + BASE_PERSONS[i] + " error");
             }
