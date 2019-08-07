@@ -43,11 +43,11 @@ public class FaceDetectDemo {
             return;
         }
 
-        byte[] jpegData = Utils.loadFile(Utils.PICTURE_ROOT + "many_faces.jpg");
-        //byte[] jpegData = loadFile(PICTURE_ROOT + "fanbingbing_with_glass.jpg");
+        byte[] jpegData = Utils.loadFile(Utils.PICTURE_ROOT + "many_faces.bmp");
+        //byte[] jpegData = loadFile(PICTURE_ROOT + "fanbingbing_with_glass.bmp");
         Image image = new Image();
         image.data = jpegData;
-        image.format = ImageFormat.JPEG;
+        image.format = ImageFormat.COMPRESSED;
 
         //detectPicture step2: set picture detect parameter
         DetectParameter pictureDetectParameter = faceDetect.getPictureParameter();

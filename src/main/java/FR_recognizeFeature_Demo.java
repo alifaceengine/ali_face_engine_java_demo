@@ -54,11 +54,11 @@ public class FR_recognizeFeature_Demo {
 
 
     private static final String BASE_PERSONS[] = {
-            "liudehua_feature1.jpg", "liudehua_feature2.jpg",
-            "zhangxueyou_feature1.jpg", "zhangxueyou_feature2.jpg"};
+            "liudehua_feature1.bmp", "liudehua_feature2.bmp",
+            "zhangxueyou_feature1.bmp", "zhangxueyou_feature2.bmp"};
     private static final String TEST_PERSONS[] = {
-            "liudehua.jpg",
-            "zhangxueyou.jpg"};
+            "liudehua.bmp",
+            "zhangxueyou.bmp"};
 
     private static void registerPictures(FaceRegister faceRegister) {
         System.out.println("registerPictures begin");

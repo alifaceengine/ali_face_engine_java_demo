@@ -39,12 +39,12 @@ public class FaceVerifyDemo {
             return;
         }
 
-        byte[] imageData1 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature1.jpg");
+        byte[] imageData1 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature1.bmp");
         Image image1 = new Image();
         image1.data = imageData1;
         image1.format = ImageFormat.COMPRESSED;
 
-        byte[] imageData2 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature2.jpg");
+        byte[] imageData2 = Utils.loadFile(Utils.PICTURE_ROOT + "liudehua_feature2.bmp");
         Image image2 = new Image();
         image2.data = imageData2;
         image2.format = ImageFormat.COMPRESSED;

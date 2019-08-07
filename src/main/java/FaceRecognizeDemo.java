@@ -25,9 +25,7 @@ public class FaceRecognizeDemo {
 
 
         //step 2: set Cloud addr and account if you using CloudServer
-        //FaceEngine.setCloudAddr("101.132.89.177", 15000);
-        //FaceEngine.setCloudAddr("127.0.0.1", 8080);
-        FaceEngine.setCloudLoginAccount("admin", "admin");
+        FaceEngine.setCloudLoginAccount("user_register", "666666");
 
 
         //1:N face recognize
@@ -54,11 +52,11 @@ public class FaceRecognizeDemo {
 
 
     private static final String BASE_PERSONS[] = {
-            "liudehua_feature1.jpg", "liudehua_feature2.jpg",
-            "zhangxueyou_feature1.jpg", "zhangxueyou_feature2.jpg"};
+            "liudehua_feature1.bmp", "liudehua_feature2.bmp",
+            "zhangxueyou_feature1.bmp", "zhangxueyou_feature2.bmp"};
     private static final String TEST_PERSONS[] = {
-            "liudehua.jpg",
-            "zhangxueyou.jpg"};
+            "liudehua.bmp",
+            "zhangxueyou.bmp"};
 
     private static void registerPictures(FaceRegister faceRegister) {
         System.out.println("registerPictures begin");
