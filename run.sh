@@ -25,5 +25,5 @@ cp -rf ./libs/${SYSTEM_NAME}/* .
 echo "cp libs success!"
 fi
 
-javac -encoding utf-8 -d . ./src/main/java/com/alibaba/cloud/faceengine/*.java src/main/java/${DEMO}.java src/main/java/Utils.java 
+javac -encoding utf-8 -d . src/main/java/${DEMO}.java src/main/java/Utils.java 
 java -Dfile.encoding=utf-8 -Djava.library.path=./ ${DEMO}
