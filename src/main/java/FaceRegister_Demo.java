@@ -8,7 +8,7 @@ import com.alibaba.cloud.faceengine.*;
 public class FaceRegister_Demo {
     private static int RunMode = Mode.TERMINAL;
     //private static int RunMode = Mode.CLOUD;
-    private static String GROUP_NAME = "组ABB";
+    private static String GROUP_NAME = "TEST3";
     private static Group sGroup = new Group();
 
     public static void main(String[] args) {
@@ -96,37 +96,16 @@ public class FaceRegister_Demo {
             Image image = new Image();
             image.data = imageData;
             image.format = ImageFormat.COMPRESSED;
-            Face faces[] = faceDetect.detectPicture(image);
-            if (faces == null) {
-                throw new RuntimeException("detectPicture " + BASE_PERSONS[i] + " error");
-            }
-
-
-            String featureStr = faceRegister.extractFeature(image, faces[0], ModelType.MODEL_3K);
-            if (featureStr == null) {
-                throw new RuntimeException("extractFeature " + BASE_PERSONS[i] + " error");
-            }
-
 
             Person person = new Person();
             person.name = personName;
-            //person.tag = "mytag";
-            int error = faceRegister.addPerson(groupId, person);
-            if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
-                throw new RuntimeException("addPerson " + personName + " error:" + error);
-            } else {
-                System.out.println("addPerson success: personName:" + person.name + " personId:" + person.id);
-            }
+            person.tag = "mytag";
 
-
-            Feature feature = new Feature();
-            feature.name = featureName;
-            feature.feature = featureStr;
-            error = faceRegister.addFeature(person.id, feature);
+            int error = faceRegister.registerPicture(groupId, image, person, featureName);
             if (error != Error.OK && error != Error.ERROR_EXISTED && error != Error.ERROR_CLOUD_EXISTED_ERROR) {
-                throw new RuntimeException("addFeature " + featureName + " error:" + error);
+                throw new RuntimeException("registerPicture " + personName + " error:" + error);
             } else {
-                System.out.println("addFeature success: personName:" + personName + " featureId:" + feature.id + " featureName:" + feature.name);/**/
+                System.out.println("registerPicture success: personName:" + person.name + " personId:" + person.id);
             }
         }
 
