@@ -11,6 +11,8 @@ public class CodecJNI {
 
     public static native void nv21Rotate270InPlace(byte[] src, int width, int height);
 
+    public static native byte[] rgb888ToJpeg(byte[] src, int width, int height, int quality);
+
     static {
         System.loadLibrary("AliFaceEngineJNI");
     }

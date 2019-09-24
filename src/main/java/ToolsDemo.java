@@ -19,8 +19,17 @@ public class ToolsDemo {
         } else {
             System.out.println("authorize OK");
         }
+        rgb888ToJpeg();
 
         compareFeatures();
+    }
+
+    private static void rgb888ToJpeg() {
+        byte[] image = Utils.loadFile("/Users/junyuan.hjy/Downloads/aaa.yuv");
+        byte[] jpeg = Codec.rgb888ToJpeg(image, 1280, 720, 90);
+        System.out.println("jpeg: " + jpeg.length);
+
+        Utils.saveFile(jpeg, "data.jpeg");
     }
 
     private static void compareFeatures() {

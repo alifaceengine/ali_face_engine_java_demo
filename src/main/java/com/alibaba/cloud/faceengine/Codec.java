@@ -16,4 +16,9 @@ public class Codec {
     public static void nv21Rotate270InPlace(byte[] src, int width, int height) {
         CodecJNI.nv21Rotate270InPlace(src, width, height);
     }
+
+    public static byte[] rgb888ToJpeg(byte[] src, int width, int height, int quality) {
+        return CodecJNI.rgb888ToJpeg(src, width, height, quality);
+    }
+
 }
