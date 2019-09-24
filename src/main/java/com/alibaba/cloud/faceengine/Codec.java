@@ -21,4 +21,8 @@ public class Codec {
         return CodecJNI.rgb888ToJpeg(src, width, height, quality);
     }
 
+    public static byte[] rgb888ToBmp(byte[] src, int width, int height) {
+        return CodecJNI.rgb888ToBmp(src, width, height);
+    }
+
 }

@@ -19,8 +19,9 @@ public class ToolsDemo {
         } else {
             System.out.println("authorize OK");
         }
-        rgb888ToJpeg();
 
+        rgb888ToBmp();
+        rgb888ToJpeg();
         compareFeatures();
     }
 
@@ -30,6 +31,14 @@ public class ToolsDemo {
         System.out.println("jpeg: " + jpeg.length);
 
         Utils.saveFile(jpeg, "data.jpeg");
+    }
+
+    private static void rgb888ToBmp() {
+        byte[] image = Utils.loadFile("/Users/junyuan.hjy/Downloads/aaa.yuv");
+        byte[] bmp = Codec.rgb888ToBmp(image, 1280, 720);
+        System.out.println("bmp: " + bmp.length);
+
+        Utils.saveFile(bmp, "datadddd.bmp");
     }
 
     private static void compareFeatures() {

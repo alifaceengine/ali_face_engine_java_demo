@@ -13,6 +13,8 @@ public class CodecJNI {
 
     public static native byte[] rgb888ToJpeg(byte[] src, int width, int height, int quality);
 
+    public static native byte[] rgb888ToBmp(byte[] src, int width, int height);
+
     static {
         System.loadLibrary("AliFaceEngineJNI");
     }
