@@ -30,6 +30,8 @@ public class FaceDetectDemo {
 
         //face detect
         detectPicture();
+
+        FaceEngine.unInitialize();
     }
 
 
