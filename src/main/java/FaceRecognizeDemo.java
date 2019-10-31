@@ -48,6 +48,8 @@ public class FaceRecognizeDemo {
         //release instance
         FaceRecognize.deleteInstance(faceRecognize);
         FaceRegister.deleteInstance(faceRegister);
+
+        FaceEngine.unInitialize();
     }
 
 

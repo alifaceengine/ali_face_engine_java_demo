@@ -52,6 +52,8 @@ public class FaceRegister_Demo {
 
         //release instance
         FaceRegister.deleteInstance(faceRegister);
+
+        FaceEngine.unInitialize();
     }
 
 

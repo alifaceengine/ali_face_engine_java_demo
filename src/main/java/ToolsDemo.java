@@ -23,6 +23,8 @@ public class ToolsDemo {
         rgb888ToBmp();
         rgb888ToJpeg();
         compareFeatures();
+
+        FaceEngine.unInitialize();
     }
 
     private static void rgb888ToJpeg() {

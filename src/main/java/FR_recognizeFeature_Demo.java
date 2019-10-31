@@ -50,6 +50,8 @@ public class FR_recognizeFeature_Demo {
         //release instance
         FaceRecognize.deleteInstance(faceRecognize);
         FaceRegister.deleteInstance(faceRegister);
+
+        FaceEngine.unInitialize();
     }
 
 

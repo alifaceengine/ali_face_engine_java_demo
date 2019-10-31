@@ -22,6 +22,8 @@ public class FaceVerifyDemo {
 
         //1:1 face verify
         verifyPicture();
+
+        FaceEngine.unInitialize();
     }
 
     private static void verifyPicture() {
