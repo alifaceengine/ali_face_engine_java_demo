@@ -1,5 +1,11 @@
 package com.alibaba.cloud.faceengine;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 /**
  * Created by junyuan.hjy on 2018/9/3.
  */
@@ -25,4 +31,30 @@ public class Codec {
         return CodecJNI.rgb888ToBmp(src, width, height);
     }
 
+    public static boolean isJpeg(Image image) {
+        if (image == null || image.data == null) {
+            return false;
+        }
+        //if (data[0] == 0xff && data[1] == 0xd8 && data[len - 2] == 0xff && data[len - 1] == 0xd9) {
+        if (image.data[0] == (byte) 0xff && image.data[1] == (byte) 0xd8) {
+            return true;
+        }
+        return false;
+    }
+
+    public static byte[] jpegToBmp(byte[] jpeg) {
+        try {
+            ByteArrayInputStream in = new ByteArrayInputStream(jpeg);
+            BufferedImage image = ImageIO.read(in);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ImageIO.write(image, "bmp", out);
+            if (out != null) {
+                return out.toByteArray();
+            }
+        } catch (IOException ex) {
+            return null;
+        }
+
+        return null;
+    }
 }

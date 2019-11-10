@@ -29,10 +29,30 @@ public class FaceRegister {
     }
 
     public int registerPicture(String groupId, Image image, Person person, String featureName) {
+        if (image == null || image.data == null) {
+            return Error.FAILED;
+        }
+
+        if (Codec.isJpeg(image)) {
+            image.data = Codec.jpegToBmp(image.data);
+            if (image.data == null) {
+                return Error.FAILED;
+            }
+        }
         return FaceRegisterJNI.registerPicture(mContext, groupId, image, person, featureName);
     }
 
     public int registerPicture2(String groupName, Image image, Person person, String featureName) {
+        if (image == null || image.data == null) {
+            return Error.FAILED;
+        }
+
+        if (Codec.isJpeg(image)) {
+            image.data = Codec.jpegToBmp(image.data);
+            if (image.data == null) {
+                return Error.FAILED;
+            }
+        }
         return FaceRegisterJNI.registerPicture2(mContext, groupName, image, person, featureName);
     }
 
@@ -141,6 +161,16 @@ public class FaceRegister {
     }
 
     public String extractFeature(Image image, Face face, int modelType) {
+        if (image == null || image.data == null) {
+            return null;
+        }
+
+        if (Codec.isJpeg(image)) {
+            image.data = Codec.jpegToBmp(image.data);
+            if (image.data == null) {
+                return null;
+            }
+        }
         return FaceRegisterJNI.extractFeature(mContext, image, face, modelType);
     }
 
