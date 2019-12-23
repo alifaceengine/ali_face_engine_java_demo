@@ -45,7 +45,7 @@ public class FaceDetectDemo {
             return;
         }
 
-        byte[] jpegData = Utils.loadFile(Utils.PICTURE_ROOT + "many_faces.jpg");
+        byte[] jpegData = Utils.loadFile(Utils.PICTURE_ROOT + "fanbingbing_with_glass.bmp");
         //byte[] jpegData = loadFile(PICTURE_ROOT + "fanbingbing_with_glass.jpg");
         Image image = new Image();
         image.data = jpegData;
