@@ -2,7 +2,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 
 public class Utils {
-    public static final String VENDOR_KEY = "eyJ2ZW5kb3JJZCI6ImNlc2hpX3ZlbmRvciIsInJvbGUiOjIsImNvZGUiOiI0RDgxM0M1NDkwNTBGMTQ0RjFGOTk2MkJCNjI5NUUyQyIsImV4cGlyZSI6IjIwMTkxMDMxIiwidHlwZSI6MX0=";
+    public static final String VENDOR_KEY = "DVxKR19dWQgCA1FXSVkKFA4XAxcSBEtFEEIXAFkBHRtZTFldXFBeXlZTEVZKXUZAV0UJE04UHx1CHgEZFxQXEhgZOgRICwoMAEJQBkJZUQlFXFwOEhgDSVFGUwgFAgEdUF5YGF5WWwBEQVpQFhAcThEHDBwKSjJMVlFhU1tYUlwUAVwDFFVdU1cJSFBeDU9BAV1OEUZXEhYEShUHWFBBTEcWGgYFB1BcBFE=";
     public static String PICTURE_ROOT = "./pictures/";
 
     public static byte[] loadFile(String filePath) {
